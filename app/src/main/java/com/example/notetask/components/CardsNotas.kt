@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Delete
@@ -24,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,11 +36,15 @@ import androidx.compose.ui.unit.sp
 fun CardsNotasItem(nota: String) {
 
     val context = LocalContext.current
+
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 6.dp
+            defaultElevation = 5.dp
         ),
-        modifier = Modifier.fillMaxWidth().height(100.dp),
+        modifier = Modifier
+            .width(150.dp)
+            .height(200.dp)
+            .padding(5.dp),
         onClick = {
             Toast.makeText(context, nota, Toast.LENGTH_SHORT).show()
         }
@@ -48,31 +54,15 @@ fun CardsNotasItem(nota: String) {
                 text = nota,
                 modifier = Modifier.padding(16.dp, 16.dp,0.dp,2.dp),
                 textAlign = TextAlign.Center,
-                fontSize = 20.sp
+                fontSize = 25.sp,
+                fontWeight = FontWeight.Bold
             )
             Text(
-                text = "Description",
+                text = "Descripcion Muy Alargada Para Ver Como Se Desplaza",
                 modifier = Modifier.padding(16.dp, 2.dp),
-                textAlign = TextAlign.Center,
-                color = Color.Gray,
+                textAlign = TextAlign.Left,
                 fontSize = 15.sp
             )
-        }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End
-        ) {
-            IconButton(
-                onClick = {  },
-                colors = IconButtonColors(
-                    containerColor = Color.Transparent,
-                    contentColor = Color.Red,
-                    disabledContainerColor = Color.Red,
-                    disabledContentColor = Color.White
-                )
-            ){
-                Icon(Icons.Filled.Delete, contentDescription = null)
-            }
         }
     }
 }

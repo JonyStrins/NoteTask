@@ -8,7 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.notetask.views.AddNote
 import com.example.notetask.views.HomeScreen
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun NavManager(){
     val navController = rememberNavController()
@@ -18,7 +18,7 @@ fun NavManager(){
             HomeScreen(navController)
         }
         composable(route = "agregarNota"){
-            AddNote()
+            AddNote(onUpClick = { navController.popBackStack() })
         }
     }
 }
