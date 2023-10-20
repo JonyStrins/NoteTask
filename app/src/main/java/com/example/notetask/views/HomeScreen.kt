@@ -22,11 +22,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.notetask.NotaRepository
 import com.example.notetask.components.SelectedFAB
+import com.example.notetask.viewmodels.NotaViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun HomeScreen(navController: NavHostController, repository: NotaRepository) {
     var selectedIndex by remember { mutableIntStateOf(0) }
     val options = listOf("Notas", "Tareas")
 
@@ -59,7 +61,7 @@ fun HomeScreen(navController: NavHostController) {
             }
         }
         Column {
-            SelectedFAB(options.get(selectedIndex), navController)
+            SelectedFAB(options.get(selectedIndex), navController, repository)
         }
     }
 }

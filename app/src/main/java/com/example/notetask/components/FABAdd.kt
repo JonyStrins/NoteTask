@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.notetask.NotaRepository
 
 @Composable
 fun FABAdd(navController: NavHostController) {
@@ -41,7 +42,7 @@ fun FABAddExtend() {
 
 @ExperimentalMaterial3Api
 @Composable
-fun SelectedFAB(selectedFAB: String, navController: NavHostController){
+fun SelectedFAB(selectedFAB: String, navController: NavHostController, repository: NotaRepository){
     if (selectedFAB.equals("Notas")){
         Scaffold(
             floatingActionButton = { FABAdd(navController) }
@@ -53,8 +54,8 @@ fun SelectedFAB(selectedFAB: String, navController: NavHostController){
                 contentPadding = PaddingValues(4.dp),
                 columns = GridCells.Adaptive(150.dp)
             ) {
-                items(20) {
-                    CardsNotasItem(nota = "Nota ${it + 1}")
+                items(repository.getNotas().size) {
+                    CardsNotasItem(repository.getNotas().get(it), navController)
                 }
             }
         }

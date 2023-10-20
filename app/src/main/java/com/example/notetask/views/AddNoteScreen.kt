@@ -7,15 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,20 +19,31 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.notetask.components.TopBarComponent
+import com.example.notetask.models.Nota
+import com.example.notetask.viewmodels.NotaViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
-fun AddNote(onUpClick: () -> Unit){
+fun AddNote(navController: NavController, viewModel: NotaViewModel){
     var titulo by remember { mutableStateOf("") }
     var descripcion by remember { mutableStateOf("") }
+    var state = viewModel.state
+
+    var entity = Nota(
+        titulo = titulo,
+        descripcion = descripcion,
+        multimedia = null,
+        fecha = null
+    )
 
     Scaffold(
         topBar = {
-            TopBarComponent("Agregar Nota", onUpClick)
+            TopBarComponent("Agregar Nota", navController, viewModel, entity)
         }
+
     ) {padding ->
         Column (
             modifier = Modifier

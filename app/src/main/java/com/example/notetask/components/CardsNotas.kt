@@ -29,11 +29,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.notetask.models.Nota
+import com.example.notetask.models.NotaEntity
 
 
 @ExperimentalMaterial3Api
 @Composable
-fun CardsNotasItem(nota: String) {
+fun CardsNotasItem(nota: NotaEntity, navController: NavController) {
 
     val context = LocalContext.current
 
@@ -46,19 +49,19 @@ fun CardsNotasItem(nota: String) {
             .height(200.dp)
             .padding(5.dp),
         onClick = {
-            Toast.makeText(context, nota, Toast.LENGTH_SHORT).show()
+            navController.navigate("agregarNota/${nota.id}")
         }
     ){
         Column {
             Text(
-                text = nota,
+                text = nota.titulo.toString(),
                 modifier = Modifier.padding(16.dp, 16.dp,0.dp,2.dp),
                 textAlign = TextAlign.Center,
                 fontSize = 25.sp,
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = "Descripcion Muy Alargada Para Ver Como Se Desplaza",
+                text = nota.descripcion.toString(),
                 modifier = Modifier.padding(16.dp, 2.dp),
                 textAlign = TextAlign.Left,
                 fontSize = 15.sp
