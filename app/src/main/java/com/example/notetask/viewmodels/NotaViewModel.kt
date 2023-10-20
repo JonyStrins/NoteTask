@@ -2,12 +2,12 @@ package com.example.notetask.viewmodels
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.example.notetask.NotaRepository
-import com.example.notetask.models.Nota
+import com.example.notetask.repository.NotaRepository
 import com.example.notetask.states.NotaState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
+import com.example.notetask.models.NotaEntity
 import kotlinx.coroutines.launch
 
 class NotaViewModel(
@@ -24,7 +24,7 @@ class NotaViewModel(
         }
     }
 
-    fun onNotaChange(nota: Nota){
+    fun onNotaChange(nota: NotaEntity){
         state = state.copy(
             nota = nota
         )
@@ -38,9 +38,21 @@ class NotaViewModel(
         }
     }
 
-    fun guardarNota(nota: Nota){
+    fun guardarNota(nota: NotaEntity){
         viewModelScope.launch {
             repository.insertNota(nota)
+        }
+    }
+
+    fun actualizarNota(nota: NotaEntity){
+        viewModelScope.launch {
+            repository.actualizarNota(nota)
+        }
+    }
+
+    fun eliminarNota(nota:NotaEntity){
+        viewModelScope.launch {
+            repository.eliminarNota(nota)
         }
     }
 }

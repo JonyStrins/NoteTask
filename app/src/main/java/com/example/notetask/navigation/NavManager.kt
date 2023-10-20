@@ -7,10 +7,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
-import com.example.notetask.NotaRepository
+import com.example.notetask.repository.NotaRepository
 import com.example.notetask.database.NotaDataBase
 import com.example.notetask.viewmodels.NotaViewModel
 import com.example.notetask.views.AddNote
+import com.example.notetask.views.EditNoteScreen
 import com.example.notetask.views.HomeScreen
 
 @Preview(showBackground = true)
@@ -31,7 +32,9 @@ fun NavManager(){
         }
         composable(route = "agregarNota/{id}"){
             val id = it.arguments?.getString("id")?.toInt()
-            //EditNote(navController, viewModel = notasViewModel)
+            if (id != null) {
+                EditNoteScreen(id, repository, navController, viewModel = notasViewModel)
+            }
         }
     }
 }
