@@ -30,6 +30,9 @@ import com.example.notetask.repository.MultimediaRepository
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Carousel(repository: MultimediaRepository, notaID: Int){
+
+    // Trabajar Con el ViewModel y sacar to do para no iterar imagenes
+
     LazyRow(
         modifier = Modifier.fillMaxWidth()
             .height(200.dp)
