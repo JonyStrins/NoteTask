@@ -1,5 +1,6 @@
 package com.example.notetask.models
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.Date
@@ -11,5 +12,5 @@ data class NotaEntity(
     val titulo: String?,
     val descripcion: String?,
     val multimedia: String?,
-    val fecha: Date?
+    val fecha: String?
 )

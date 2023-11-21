@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -20,8 +21,6 @@ import com.example.notetask.viewmodels.NotaViewModel
 fun TopBarComponent(
     agregacion: String,
     navController: NavController,
-    viewModel: NotaViewModel,
-    entity: NotaEntity?
 ){
     TopAppBar(
         title = { Text(agregacion) },
@@ -34,10 +33,7 @@ fun TopBarComponent(
         },
         actions = {
             IconButton(onClick = {
-                if (entity != null) {
-                    viewModel.guardarNota(entity)
-                    navController.popBackStack()
-                }
+
             }
             ){
                 Icon(Icons.Default.Check, contentDescription = null, tint = Color.Green)
@@ -70,16 +66,7 @@ fun TopBarComponentEdit(
                         navController.popBackStack()
                 }
             }){
-                Icon(Icons.Default.Delete, contentDescription = null, tint = Color.Red)
-            }
-            IconButton(onClick = {
-                if (entity != null) {
-                    viewModel.actualizarNota(entity)
-                    navController.popBackStack()
-                }
-            }
-            ){
-                Icon(Icons.Default.Check, contentDescription = null, tint = Color.Green)
+                Icon(Icons.Outlined.Delete, contentDescription = null)
             }
         }
     )

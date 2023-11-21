@@ -62,8 +62,7 @@ fun SelectedFAB(selectedFAB: String, navController: NavHostController, repositor
     } else {
         Scaffold(
             floatingActionButton = { FABAddExtend() }
-        ){
-                padding ->
+        ){ padding ->
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
@@ -71,7 +70,7 @@ fun SelectedFAB(selectedFAB: String, navController: NavHostController, repositor
                 contentPadding = PaddingValues(16.dp)
             ) {
                 items(20) {
-                    ListItemComponent("Tarea ${it+1}")
+                    ListItemComponent()
                     Spacer(modifier = Modifier.height(7.dp))
                 }
             }

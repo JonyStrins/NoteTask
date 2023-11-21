@@ -24,18 +24,16 @@ class NotaViewModel(
         }
     }
 
-    fun onNotaChange(nota: NotaEntity){
-        state = state.copy(
-            nota = nota
-        )
-    }
-
     fun obtenerNotaID(id: Int){
         viewModelScope.launch {
             state = state.copy(
                 nota = repository.getByID(id)
             )
         }
+    }
+
+    fun obtenerUltimaNota(): Int{
+        return repository.getUltimoIdNota()
     }
 
     fun guardarNota(nota: NotaEntity){

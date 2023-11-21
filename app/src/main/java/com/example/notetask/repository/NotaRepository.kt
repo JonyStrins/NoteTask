@@ -14,6 +14,10 @@ class NotaRepository(
         return notaDao.getNotaById(id)
     }
 
+    fun getUltimoIdNota(): Int{
+        return notaDao.getUltimoIdNota()
+    }
+
     fun insertNota(nota: NotaEntity){
         val entity = NotaEntity(
             id = 0,

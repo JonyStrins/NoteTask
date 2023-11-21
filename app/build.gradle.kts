@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.notetask"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -52,6 +52,16 @@ android {
 
 dependencies {
 
+    implementation ("io.coil-kt:coil-compose:2.4.0")
+
+    //Camera X
+    val camerax_version = "1.4.0-alpha02"
+    implementation ("androidx.camera:camera-camera2:$camerax_version")
+    implementation ("androidx.camera:camera-lifecycle:$camerax_version")
+    implementation ("androidx.camera:camera-view:$camerax_version")
+    implementation ("androidx.camera:camera-extensions:$camerax_version")
+
+
     //Room
     val room_version = "2.6.0"
 
@@ -59,11 +69,11 @@ dependencies {
     kapt ("androidx.room:room-compiler:$room_version")
 
     //Navigation
-    val navigation_compose_version = "2.7.4"
+    val navigation_compose_version = "2.7.5"
     implementation ("androidx.navigation:navigation-compose:$navigation_compose_version")
 
     //Material 3
-    val version_material_3 = "1.2.0-alpha09"
+    val version_material_3 = "1.2.0-alpha10"
     implementation("androidx.compose.material3:material3-android:$version_material_3")
     implementation("androidx.compose.material3:material3-window-size-class:$version_material_3")
 
