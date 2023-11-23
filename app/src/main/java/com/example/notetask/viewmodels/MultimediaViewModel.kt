@@ -20,9 +20,18 @@ class MultimediaViewModel(
     init{
         viewModelScope.launch {
             state = state.copy(
-                multimedias = repository.getMultimediaNota(idNotas)
+                multimedias = repository.getTodaMultimedia()
+
             )
         }
+    }
+
+    fun obtenerMultimediaPorNota(idNota: Int): List<MultimediaEntity>{
+        viewModelScope.launch {
+            repository.getMultimediaNota(idNota)
+        }
+
+        return repository.getMultimediaNota(idNota)
     }
 
     fun agregarMultimedia(multi: MultimediaEntity){

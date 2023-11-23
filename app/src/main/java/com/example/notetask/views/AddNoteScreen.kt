@@ -6,6 +6,7 @@ import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -127,7 +128,15 @@ fun EditNoteScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            Carousel(multiRepository, entity.id)
+            if (multiViewModel.obtenerMultimediaPorNota(entity.id).isNotEmpty()){
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                        .height(200.dp)
+                        .padding(2.dp, 5.dp)
+                ) {
+                    Carousel(multiViewModel.obtenerMultimediaPorNota(entity.id))
+                }
+            }
             TextField(
                 value = titulo.toString(),
                 onValueChange = { titulo = it },

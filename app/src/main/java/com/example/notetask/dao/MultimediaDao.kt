@@ -12,6 +12,9 @@ interface MultimediaDao {
     @Query("SELECT * FROM MultimediaEntity WHERE tipo = 1 AND idNota = :idNota ORDER BY id desc")
     fun getMultimediaNotas(idNota: Int): List<MultimediaEntity>
 
+    @Query("SELECT * FROM MultimediaEntity")
+    fun getTodaMultimedia(): List<MultimediaEntity>
+
     @Insert
     fun insertarMultimedia(multimedia: MultimediaEntity)
 
