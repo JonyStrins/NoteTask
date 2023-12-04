@@ -13,5 +13,8 @@ data class MultimediaEntity(
     //2 Para tarea
     val tipo: Int,
     val idNota: Int?,
-    val idTarea: Int?
+    val idTarea: Int?,
+    val descripcion: String?,
+    val ruta: String?,
 )
+

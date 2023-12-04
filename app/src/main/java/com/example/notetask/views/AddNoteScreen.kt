@@ -55,7 +55,11 @@ fun AddNote(
         titulo = titulo,
         descripcion = descripcion,
         multimedia = null,
-        fecha = fechaActual
+        fecha = fechaActual,
+        estatus = null,
+        tipo = null,
+        fechaCum = null,
+        fechaModi = null
     )
 
     Scaffold(
@@ -108,11 +112,15 @@ fun EditNoteScreen(
     var fechaActual = "${LocalDateTime.now().dayOfMonth}/${LocalDateTime.now().month.value}/${LocalDateTime.now().year}"
 
     var entity = NotaEntity(
-        id = id,
+        id = 0,
         titulo = titulo,
         descripcion = descripcion,
         multimedia = null,
-        fecha = fechaActual
+        fecha = fechaActual,
+        estatus = null,
+        tipo = null,
+        fechaCum = null,
+        fechaModi = null
     )
 
     Scaffold(

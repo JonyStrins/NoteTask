@@ -76,7 +76,7 @@ fun BottomAppComponentAdd(
                 }
                 selectedUris.forEach{
                     if (entity != null) {
-                        viewModelMulti.agregarMultimedia(MultimediaEntity(0, it.toString(), 1, viewModel.obtenerUltimaNota(), null))
+                        viewModelMulti.agregarMultimedia(MultimediaEntity(0, it.toString(), 1, viewModel.obtenerUltimaNota(), null, null, null))
                     }
                 }
             }, containerColor = Color.Green){
@@ -139,7 +139,7 @@ fun BottomAppComponentEdit(
                 }
                 selectedUris.forEach{
                     if (entity != null) {
-                        viewModelMulti.agregarMultimedia(MultimediaEntity(0, it.toString(), 1, entity.id, null))
+                        viewModelMulti.agregarMultimedia(MultimediaEntity(0, it.toString(), 1, entity.id, null, null, null))
                     }
                 }
             }, containerColor = Color.Green){

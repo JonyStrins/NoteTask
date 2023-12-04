@@ -12,5 +12,9 @@ data class NotaEntity(
     val titulo: String?,
     val descripcion: String?,
     val multimedia: String?,
-    val fecha: String?
+    val estatus: Int?,
+    val tipo: Int?,
+    val fecha: String?,
+    val fechaModi: String?,
+    val fechaCum: String?,
 )

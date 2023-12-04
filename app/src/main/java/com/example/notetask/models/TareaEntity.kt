@@ -7,8 +7,11 @@ class TareaEntity (
     val id: Int,
     val titulo: String?,
     val contenido: String?,
-    val multimedia: String?,
-    val fecha: String?
-    //se hizo la entity
+    val estatus: Int?,
+    val tipo: Int?,
+    val fecha: String?,
+    val fechaModi: String?,
+    val fechaCum: String?
 )
 
+//estos datos son los que se tienen en la API de visual studio
