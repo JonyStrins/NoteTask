@@ -24,7 +24,11 @@ class NotaRepository(
             titulo = nota.titulo,
             descripcion = nota.descripcion,
             multimedia = nota.multimedia,
-            fecha = nota.fecha
+            fecha = nota.fecha,
+            estatus = null,
+            tipo = null,
+            fechaModi = null,
+            fechaCum = null
         )
 
         notaDao.insertNota(entity)
@@ -36,7 +40,11 @@ class NotaRepository(
             titulo = nota.titulo,
             descripcion = nota.descripcion,
             multimedia = nota.multimedia,
-            fecha = nota.fecha
+            fecha = nota.fecha,
+            estatus = null,
+            tipo = null,
+            fechaCum = null,
+            fechaModi = null
         )
 
         notaDao.actualizarNota(entity)
@@ -48,7 +56,11 @@ class NotaRepository(
             titulo = nota.titulo,
             descripcion = nota.descripcion,
             multimedia = nota.multimedia,
-            fecha = nota.fecha
+            fecha = nota.fecha,
+            estatus = null,
+            tipo = null,
+            fechaModi = null,
+            fechaCum = null
         )
         notaDao.eliminarNota(entity)
     }

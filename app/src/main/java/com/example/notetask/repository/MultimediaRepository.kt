@@ -23,7 +23,9 @@ class MultimediaRepository(
             uri = multi.uri,
             tipo = 1,
             idNota = multi.idNota,
-            idTarea = null
+            idTarea = null,
+            descripcion = null,
+            ruta = null
         )
 
         multiDao.insertarMultimedia(entity)
