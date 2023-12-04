@@ -9,5 +9,6 @@ class TareaEntity (
     val contenido: String?,
     val multimedia: String?,
     val fecha: String?
+    //se hizo la entity
 )
 

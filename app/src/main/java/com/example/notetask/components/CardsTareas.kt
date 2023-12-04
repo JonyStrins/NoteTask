@@ -91,7 +91,7 @@ fun CardsTareasItem(
     }
 }
 
-
+//se hizo el diseño
 
 
 
