@@ -18,3 +18,5 @@ data class NotaEntity(
     val fechaModi: String?,
     val fechaCum: String?,
 )
+
+

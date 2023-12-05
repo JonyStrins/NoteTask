@@ -3,6 +3,7 @@ package com.example.notetask.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -10,9 +11,12 @@ import androidx.room.Room
 import com.example.notetask.repository.NotaRepository
 import com.example.notetask.database.NotaDataBase
 import com.example.notetask.repository.MultimediaRepository
+import com.example.notetask.repository.TareaRepository
 import com.example.notetask.viewmodels.MultimediaViewModel
 import com.example.notetask.viewmodels.NotaViewModel
+import com.example.notetask.viewmodels.TareaViewModel
 import com.example.notetask.views.AddNote
+import com.example.notetask.views.AddTask
 import com.example.notetask.views.EditNoteScreen
 import com.example.notetask.views.HomeScreen
 
@@ -26,6 +30,11 @@ fun NavManager(){
     val repository = NotaRepository(dao)
     val multiRepository = MultimediaRepository(multiDao)
     val notasViewModel = NotaViewModel(repository)
+    //prueba de lo mio
+    val tdao = db.Tdao
+    val Trepository = TareaRepository(tdao)
+    val tareasViewModel = TareaViewModel(Trepository)
+
 
     NavHost(navController = navController, startDestination = "inicio"){
         composable(route = "inicio"){
@@ -39,6 +48,9 @@ fun NavManager(){
             if (id != null) {
                 EditNoteScreen(id, repository, navController, viewModel = notasViewModel, multiRepository)
             }
+        }
+        composable(route = "agregarTarea"){
+            AddTask(navController, TviewModel = tareasViewModel , multiRepository )
         }
     }
 }

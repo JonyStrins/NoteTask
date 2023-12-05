@@ -1,8 +1,9 @@
 package com.example.notetask.models
 
 import androidx.room.PrimaryKey
-
-class TareaEntity (
+import androidx.room.Entity
+@Entity
+data class TareaEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val titulo: String?,
@@ -13,5 +14,3 @@ class TareaEntity (
     val fechaModi: String?,
     val fechaCum: String?
 )
-
-//estos datos son los que se tienen en la API de visual studio

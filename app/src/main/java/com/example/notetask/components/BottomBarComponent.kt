@@ -23,15 +23,17 @@ import androidx.navigation.NavController
 import com.example.notetask.R
 import com.example.notetask.models.MultimediaEntity
 import com.example.notetask.models.NotaEntity
+import com.example.notetask.models.TareaEntity
 import com.example.notetask.viewmodels.MultimediaViewModel
 import com.example.notetask.viewmodels.NotaViewModel
+import com.example.notetask.viewmodels.TareaViewModel
 
 @Composable
 fun BottomAppComponentAdd(
     navController: NavController,
     viewModel: NotaViewModel,
     viewModelMulti: MultimediaViewModel,
-    entity: NotaEntity?
+    entity: NotaEntity
 ){
 
     var selectedUris by remember{
