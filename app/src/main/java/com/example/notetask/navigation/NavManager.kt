@@ -31,7 +31,7 @@ fun NavManager(){
     val multiRepository = MultimediaRepository(multiDao)
     val notasViewModel = NotaViewModel(repository)
     //prueba de lo mio
-    val tdao = db.Tdao
+    val tdao = db.tDao
     val Trepository = TareaRepository(tdao)
     val tareasViewModel = TareaViewModel(Trepository)
 
@@ -43,10 +43,12 @@ fun NavManager(){
         composable(route = "agregarNota"){
             AddNote(navController, viewModel = notasViewModel, multiRepository)
         }
-        composable(route = "agregarNota/{id}"){
+        composable(route = "editarNota/{id}"){
             val id = it.arguments?.getString("id")?.toInt()
             if (id != null) {
                 EditNoteScreen(id, repository, navController, viewModel = notasViewModel, multiRepository)
+            }else{
+                HomeScreen(navController, repository)
             }
         }
         composable(route = "agregarTarea"){

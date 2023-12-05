@@ -103,6 +103,7 @@ fun EditNoteScreen(
     viewModel: NotaViewModel,
     multiRepository: MultimediaRepository
 ){
+//    viewModel.obtenerNotaID(id)
     var note = repository.getByID(id)
 
     val multiViewModel = MultimediaViewModel(multiRepository, id)
@@ -111,15 +112,15 @@ fun EditNoteScreen(
     var fechaActual = "${LocalDateTime.now().dayOfMonth}/${LocalDateTime.now().month.value}/${LocalDateTime.now().year}"
 
     var entity = NotaEntity(
-        id = 0,
+        id = id,
         titulo = titulo,
         descripcion = descripcion,
         multimedia = null,
-        fecha = fechaActual,
+        fecha = "00/00/00",
         estatus = null,
         tipo = null,
         fechaCum = null,
-        fechaModi = null
+        fechaModi = fechaActual
     )
 
     Scaffold(

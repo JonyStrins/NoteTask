@@ -17,6 +17,5 @@ import com.example.notetask.models.TareaEntity
 abstract class NotaDataBase : RoomDatabase() {
     abstract val dao: NotaDao
     abstract val multiDao: MultimediaDao
-    //prueba de lo mio
-    abstract val Tdao: TareaDao
+    abstract val tDao: TareaDao
 }

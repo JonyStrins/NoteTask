@@ -48,7 +48,7 @@ fun TopBarComponentEdit(
     agregacion: String,
     navController: NavController,
     viewModel: NotaViewModel,
-    entity: NotaEntity?
+    entity: NotaEntity
 ){
     TopAppBar(
         title = { Text(agregacion) },
@@ -61,10 +61,8 @@ fun TopBarComponentEdit(
         },
         actions = {
             IconButton(onClick = {
-                if (entity != null){
-                        viewModel.eliminarNota(entity)
-                        navController.popBackStack()
-                }
+                viewModel.eliminarNota(entity)
+                navController.popBackStack()
             }){
                 Icon(Icons.Outlined.Delete, contentDescription = null)
             }
