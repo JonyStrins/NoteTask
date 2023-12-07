@@ -10,11 +10,11 @@ data class NotaEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val titulo: String?,
-    val descripcion: String?,
+    val descripcion: String ?,
     val multimedia: String?,
     val estatus: Int?,
     val tipo: Int?,
-    val fecha: String?,
+    val fecha: String,
     val fechaModi: String?,
     val fechaCum: String?,
 )

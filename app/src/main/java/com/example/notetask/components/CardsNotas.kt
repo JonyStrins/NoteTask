@@ -43,7 +43,7 @@ fun CardsNotasItem(
             .height(200.dp)
             .padding(5.dp),
         onClick = {
-            navController.navigate("agregarNota/${nota.id}")
+            navController.navigate("editarNota/${nota.id}")
         }
     ){
         Column(

@@ -35,33 +35,10 @@ class NotaRepository(
     }
 
     fun actualizarNota(nota: NotaEntity){
-        val entity = NotaEntity(
-            id = nota.id,
-            titulo = nota.titulo,
-            descripcion = nota.descripcion,
-            multimedia = nota.multimedia,
-            fecha = nota.fecha,
-            estatus = null,
-            tipo = null,
-            fechaCum = null,
-            fechaModi = null
-        )
-
-        notaDao.actualizarNota(entity)
+        notaDao.actualizarNota(nota)
     }
 
     fun eliminarNota(nota: NotaEntity){
-        val entity = NotaEntity(
-            id = nota.id,
-            titulo = nota.titulo,
-            descripcion = nota.descripcion,
-            multimedia = nota.multimedia,
-            fecha = nota.fecha,
-            estatus = null,
-            tipo = null,
-            fechaModi = null,
-            fechaCum = null
-        )
-        notaDao.eliminarNota(entity)
+        notaDao.eliminarNota(nota)
     }
 }
