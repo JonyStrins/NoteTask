@@ -55,7 +55,7 @@ fun NavManager(){
         composable(route = "agregarTarea"){
             AddTask(navController, viewModel = tareasViewModel , multiRepository )
         }
-        composable(route = "agregarTarea/{id}"){
+        composable(route = "editarTarea/{id}"){
             val id = it.arguments?.getString("id")?.toInt()
             if(id != null){
                 EditTaskScreen( id, Trepository, navController, viewModel = tareasViewModel, multiRepository)
