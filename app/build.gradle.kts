@@ -52,6 +52,14 @@ android {
 
 dependencies {
 
+    //Mapas con compose
+    implementation("com.google.maps.android:maps-compose:2.11.4")
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    //osmdroid compose
+    implementation("org.osmdroid:osmdroid-android:6.1.17")
+    implementation("tech.utsmankece:osm-android-compose:0.0.5")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
     implementation ("io.coil-kt:coil-compose:2.4.0")
 
     //Camera X
