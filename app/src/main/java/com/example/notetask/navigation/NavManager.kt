@@ -49,7 +49,7 @@ fun NavManager(){
             if (id != null) {
                 EditNoteScreen(id, repository, navController, viewModel = notasViewModel, multiRepository)
             }else{
-                HomeScreen(navController, repository)
+                HomeScreen(navController, repository, Trepository)
             }
         }
         composable(route = "agregarTarea"){
@@ -59,6 +59,8 @@ fun NavManager(){
             val id = it.arguments?.getString("id")?.toInt()
             if(id != null){
                 EditTaskScreen( id, Trepository, navController, viewModel = tareasViewModel, multiRepository)
+            }else{
+                HomeScreen(navController, repository, Trepository)
             }
         }
     }

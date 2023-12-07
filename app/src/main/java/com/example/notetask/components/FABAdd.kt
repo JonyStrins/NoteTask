@@ -33,9 +33,9 @@ fun FABAdd(navController: NavHostController) {
 }
 
 @Composable
-fun FABAddExtend() {
+fun FABAddExtend(navController: NavHostController) {
     ExtendedFloatingActionButton(
-        onClick = {  },
+        onClick = { navController.navigate("agregarTarea") },
         icon = { Icon(imageVector = Icons.Filled.Add, contentDescription = null) },
         text = { Text(text = "Agregar Tarea")},
     )
@@ -62,7 +62,7 @@ fun SelectedFAB(selectedFAB: String, navController: NavHostController, repositor
         }
     } else {
         Scaffold(
-            floatingActionButton = { FABAddExtend() }
+            floatingActionButton = { FABAddExtend(navController) }
         ){ padding ->
             LazyColumn(
                 modifier = Modifier

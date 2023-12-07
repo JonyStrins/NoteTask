@@ -237,8 +237,8 @@ fun EditTaskScreen(
         titulo = titulo,
         contenido = contenido,
         estatus = null,
-        fecha = fechaActual,
-        fechaModi = null,
+        fecha = "00/00/00",
+        fechaModi = fechaActual,
         fechaCum = null,
         tipo = 1
     )
