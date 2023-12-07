@@ -18,6 +18,7 @@ import com.example.notetask.viewmodels.TareaViewModel
 import com.example.notetask.views.AddNote
 import com.example.notetask.views.AddTask
 import com.example.notetask.views.EditNoteScreen
+import com.example.notetask.views.EditTaskScreen
 import com.example.notetask.views.HomeScreen
 
 @Preview(showBackground = true)
@@ -38,7 +39,7 @@ fun NavManager(){
 
     NavHost(navController = navController, startDestination = "inicio"){
         composable(route = "inicio"){
-            HomeScreen(navController, repository)
+            HomeScreen(navController, repository, Trepository)
         }
         composable(route = "agregarNota"){
             AddNote(navController, viewModel = notasViewModel, multiRepository)
@@ -48,11 +49,19 @@ fun NavManager(){
             if (id != null) {
                 EditNoteScreen(id, repository, navController, viewModel = notasViewModel, multiRepository)
             }else{
-                HomeScreen(navController, repository)
+                HomeScreen(navController, repository, Trepository)
             }
         }
         composable(route = "agregarTarea"){
-            AddTask(navController, TviewModel = tareasViewModel , multiRepository )
+            AddTask(navController, viewModel = tareasViewModel , multiRepository )
+        }
+        composable(route = "editarTarea/{id}"){
+            val id = it.arguments?.getString("id")?.toInt()
+            if(id != null){
+                EditTaskScreen( id, Trepository, navController, viewModel = tareasViewModel, multiRepository)
+            }else{
+                HomeScreen(navController, repository, Trepository)
+            }
         }
     }
 }

@@ -51,7 +51,16 @@ class NotaViewModel(
     fun eliminarNota(nota:NotaEntity){
         viewModelScope.launch {
             state = state.copy(
-                nota = NotaEntity(id = 0, titulo = null, descripcion = null, multimedia = null, fecha = "00/00/00", estatus = null, tipo = null, fechaModi = null, fechaCum = null)
+                nota = NotaEntity(
+                    id = 0,
+                    titulo = null,
+                    descripcion = null,
+                    multimedia = null,
+                    fecha = "00/00/00",
+                    estatus = null,
+                    tipo = null,
+                    fechaModi = null,
+                    fechaCum = null)
             )
             repository.eliminarNota(nota)
         }

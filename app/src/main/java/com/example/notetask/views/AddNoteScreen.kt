@@ -101,6 +101,8 @@ fun EditNoteScreen(
     repository: NotaRepository,
     navController: NavController,
     viewModel: NotaViewModel,
+
+
     multiRepository: MultimediaRepository
 ){
 //    viewModel.obtenerNotaID(id)
