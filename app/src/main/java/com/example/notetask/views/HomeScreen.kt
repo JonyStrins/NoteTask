@@ -24,10 +24,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.notetask.repository.NotaRepository
 import com.example.notetask.components.SelectedFAB
+import com.example.notetask.repository.TareaRepository
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navController: NavHostController, repository: NotaRepository) {
+fun HomeScreen(navController: NavHostController, repository: NotaRepository, Trepository: TareaRepository) {
     var selectedIndex by remember { mutableIntStateOf(0) }
     val options = listOf("Notas", "Tareas")
 
@@ -60,7 +61,7 @@ fun HomeScreen(navController: NavHostController, repository: NotaRepository) {
             }
         }
         Column {
-            SelectedFAB(options.get(selectedIndex), navController, repository)
+            SelectedFAB(options.get(selectedIndex), navController, repository, Trepository )
         }
     }
 }

@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.notetask.repository.NotaRepository
+import com.example.notetask.repository.TareaRepository
 
 @Composable
 fun FABAdd(navController: NavHostController) {
@@ -42,7 +43,7 @@ fun FABAddExtend() {
 
 @ExperimentalMaterial3Api
 @Composable
-fun SelectedFAB(selectedFAB: String, navController: NavHostController, repository: NotaRepository){
+fun SelectedFAB(selectedFAB: String, navController: NavHostController, repository: NotaRepository, Trepository: TareaRepository){
     if (selectedFAB.equals("Notas")){
         Scaffold(
             floatingActionButton = { FABAdd(navController) }
@@ -69,8 +70,8 @@ fun SelectedFAB(selectedFAB: String, navController: NavHostController, repositor
                     .padding(padding),
                 contentPadding = PaddingValues(16.dp)
             ) {
-                items(20) {
-                    ListItemComponent()
+                items(Trepository.getTareas().size) {
+                    ListItemComponent(Trepository.getTareas().get(it), navController)
                     Spacer(modifier = Modifier.height(7.dp))
                 }
             }

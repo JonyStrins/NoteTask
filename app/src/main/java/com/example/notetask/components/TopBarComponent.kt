@@ -30,14 +30,6 @@ fun TopBarComponent(
             }){
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
             }
-        },
-        actions = {
-            IconButton(onClick = {
-
-            }
-            ){
-                Icon(Icons.Default.Check, contentDescription = null, tint = Color.Green)
-            }
         }
     )
 }
