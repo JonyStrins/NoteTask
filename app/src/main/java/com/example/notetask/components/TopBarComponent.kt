@@ -36,7 +36,7 @@ fun TopBarComponent(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBarComponentEdit(
+fun TopBarC1omponentEdit(
     agregacion: String,
     navController: NavController,
     viewModel: NotaViewModel,
