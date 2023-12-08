@@ -32,30 +32,10 @@ class TareaRepository (
     }
 
     fun actualizarTarea(tarea: TareaEntity){
-        val entity = TareaEntity(
-            id = 0,
-            titulo = tarea.titulo,
-            contenido = tarea.contenido,
-            estatus = null,
-            tipo = null,
-            fecha = tarea.fecha,
-            fechaModi = null,
-            fechaCum = null
-        )
-        tareaDao.actualizarTarea(entity)
+        tareaDao.actualizarTarea(tarea)
     }
 
     fun eliminarTarea(tarea: TareaEntity){
-        val entity = TareaEntity(
-            id = 0,
-            titulo = tarea.titulo,
-            contenido = tarea.contenido,
-            estatus = null,
-            tipo = null,
-            fecha = tarea.fecha,
-            fechaModi = null,
-            fechaCum = null
-        )
-        tareaDao.eliminarTarea(entity)
+        tareaDao.eliminarTarea(tarea)
     }
 }

@@ -131,10 +131,8 @@ fun BottomAppTaskComponentEdit(
         },
         floatingActionButton = {
             FloatingActionButton(onClick = {
-                if (entity != null) {
                     viewModel.actualizarTarea(entity)
                     navController.popBackStack()
-                }
                 selectedUris.forEach{
                     if (entity != null) {
                         viewModelMulti.agregarMultimedia(MultimediaEntity(0, it.toString(), 1, entity.id, null, null, null))

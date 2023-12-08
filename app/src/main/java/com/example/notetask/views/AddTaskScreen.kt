@@ -3,6 +3,7 @@ package com.example.notetask.views
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,10 +11,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -28,22 +33,24 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.notetask.components.BottomAppComponentAdd
-import com.example.notetask.components.BottomAppComponentEdit
+import com.example.notetask.alarmanager.AlarmItem
+import com.example.notetask.alarmanager.AlarmScheduler
+import com.example.notetask.alarmanager.AlarmSchedulerImpl
 import com.example.notetask.components.BottomAppTaskComponentAdd
 import com.example.notetask.components.BottomAppTaskComponentEdit
 import com.example.notetask.components.Carousel
-import com.example.notetask.components.TopBarComponent
-import com.example.notetask.components.TopBarComponentEdit
 import com.example.notetask.components.TopBarTaskComponent
 import com.example.notetask.components.TopBarTaskComponentEdit
 import com.example.notetask.models.TareaEntity
 import com.example.notetask.repository.MultimediaRepository
 import com.example.notetask.repository.TareaRepository
+import com.example.notetask.states.FechaState
 import com.example.notetask.viewmodels.MultimediaViewModel
 import com.example.notetask.viewmodels.TareaViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -58,7 +65,6 @@ import java.util.Locale
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-@Preview
 fun AddTask(
     navController: NavController,
     viewModel: TareaViewModel,
@@ -72,6 +78,16 @@ fun AddTask(
     val selectedDate = remember { mutableStateOf<Date?>(null) }
     val snackState = remember { SnackbarHostState() }
     val snackScope = rememberCoroutineScope()
+    var secondText by remember {
+        mutableStateOf("")
+    }
+    val alarmScheduler: AlarmScheduler = AlarmSchedulerImpl(LocalContext.current)
+    var alarmItem: AlarmItem? = null
+    var calendar = Calendar.getInstance()
+    calendar.set(LocalDate.now().year, LocalDate.now().monthValue-1, LocalDate.now().dayOfMonth)
+    var fechaState = remember { mutableStateOf(FechaState()) }
+
+
 
     //crear la entity
     var entity = TareaEntity(
@@ -81,7 +97,7 @@ fun AddTask(
         estatus = null,
         fecha = fechaActual,
         fechaModi = null,
-        fechaCum = null,
+        fechaCum = fechaState.value.fecha,
         tipo = 1
     )
     Scaffold (
@@ -96,57 +112,71 @@ fun AddTask(
                 entity
             )
         }
-    ){ padding ->
-        AddTaskContent(
-            titulo = titulo,
-            onTituloChange = { titulo = it },
-            contenido = contenido,
-            onContenidoChange = { contenido = it },
-            openDialog = openDialog,
-            selectedDate = selectedDate,
-            snackState = snackState,
-            snackScope = snackScope
-        )
-    }
-}
-
-@Composable
-private fun AddTaskContent(
-    titulo: String,
-    onTituloChange: (String) -> Unit,
-    contenido: String,
-    onContenidoChange: (String) -> Unit,
-    openDialog: MutableState<Boolean>,
-    selectedDate: MutableState<Date?>,
-    snackState: SnackbarHostState,
-    snackScope: CoroutineScope
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        TextField(
-            value = titulo,
-            onValueChange = onTituloChange,
-            modifier = Modifier.fillMaxWidth(),
-            label = { Text("Titulo") },
-            placeholder = { Text("Titulo") }
-        )
-        AddTaskDatePicker(
-            openDialog = openDialog,
-            selectedDate = selectedDate,
-            snackState = snackState,
-            snackScope = snackScope
-        )
-        Spacer(modifier = Modifier.height(7.dp))
-        TextField(
-            value = contenido,
-            onValueChange = onContenidoChange,
-            modifier = Modifier.fillMaxSize(),
-            label = { Text("Descripcion") },
-            placeholder = { Text("Descripcion") }
-        )
+    ){
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+                .verticalScroll(rememberScrollState())
+        ) {
+            TextField(
+                value = titulo,
+                onValueChange = { titulo = it },
+                modifier = Modifier.fillMaxWidth(),
+                label = { Text("Titulo") },
+                placeholder = { Text("Titulo") }
+            )
+            AddTaskDatePicker(
+                openDialog = openDialog,
+                selectedDate = selectedDate,
+                snackState = snackState,
+                snackScope = snackScope
+            )
+            OutlinedTextField(value = secondText, onValueChange = {
+                secondText = it
+            },
+                label = {
+                    Text(text = "Delay Second")
+                }
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Button(onClick = {
+                    if(secondText != ""){
+                        alarmItem = AlarmItem(
+                            time = LocalDateTime.now().plusSeconds(
+                                secondText.toLong()
+                            ),
+                            title = titulo,
+                            message = contenido
+                        )
+                        alarmItem?.let(alarmScheduler::schedule)
+                        secondText = ""
+                    }
+                }) {
+                    Text(text = "Schedule")
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Button(onClick = {
+                    alarmItem?.let(alarmScheduler::cancel)
+                }) {
+                    Text(text = "Cancel")
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+            }
+            Spacer(modifier = Modifier.height(7.dp))
+            TextField(
+                value = contenido,
+                onValueChange = { contenido = it },
+                modifier = Modifier.fillMaxSize(),
+                label = { Text("Descripcion") },
+                placeholder = { Text("Descripcion") }
+            )
+        }
     }
 }
 
@@ -156,7 +186,7 @@ private fun AddTaskDatePicker(
     openDialog: MutableState<Boolean>,
     selectedDate: MutableState<Date?>,
     snackState: SnackbarHostState,
-    snackScope: CoroutineScope
+    snackScope: CoroutineScope,
 ) {
 
     var calendar = Calendar.getInstance()
@@ -231,18 +261,24 @@ fun EditTaskScreen(
     val multiViewModel = MultimediaViewModel(multiRepository, id)
     var titulo by remember { mutableStateOf(task.titulo) }
     var contenido by remember { mutableStateOf(task.contenido) }
+    var fecha by remember { mutableStateOf(task.fecha) }
     var fechaActual = "${LocalDateTime.now().dayOfMonth}/${LocalDateTime.now().month.value}/${LocalDateTime.now().year}"
     val openDialog = remember { mutableStateOf(false) }
     val selectedDate = remember { mutableStateOf<Date?>(null) }
     val snackState = remember { SnackbarHostState() }
     val snackScope = rememberCoroutineScope()
+    var secondText by remember {
+        mutableStateOf("")
+    }
+    val alarmScheduler: AlarmScheduler = AlarmSchedulerImpl(LocalContext.current)
+    var alarmItem: AlarmItem? = null
 
     var entity = TareaEntity(
-        id = 0,
+        id = id,
         titulo = titulo,
         contenido = contenido,
         estatus = null,
-        fecha = "00/00/00",
+        fecha = fecha,
         fechaModi = fechaActual,
         fechaCum = null,
         tipo = 1
@@ -283,6 +319,43 @@ fun EditTaskScreen(
                 snackState = snackState,
                 snackScope = snackScope
             )
+
+            OutlinedTextField(value = secondText, onValueChange = {
+                secondText = it
+            },
+                label = {
+                    Text(text = "Delay Second")
+                }
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Button(onClick = {
+                    if(secondText != ""){
+                        alarmItem = AlarmItem(
+                            time = LocalDateTime.now().plusSeconds(
+                                secondText.toLong()
+                            ),
+                            title = titulo,
+                            message = contenido
+                        )
+                        alarmItem?.let(alarmScheduler::schedule)
+                        secondText = ""
+                    }
+                }) {
+                    Text(text = "Schedule")
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Button(onClick = {
+                    alarmItem?.let(alarmScheduler::cancel)
+                }) {
+                    Text(text = "Cancel")
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+            }
             Spacer(modifier = Modifier.height(7.dp))
             TextField(
                 value = contenido.toString(),
