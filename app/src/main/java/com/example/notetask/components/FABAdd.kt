@@ -35,7 +35,7 @@ fun FABAdd(navController: NavHostController) {
 @Composable
 fun FABAddExtend(navController: NavHostController) {
     ExtendedFloatingActionButton(
-        onClick = { navController.navigate("agregarTarea") },
+        onClick = { navController.navigate("agregarTarea")},
         icon = { Icon(imageVector = Icons.Filled.Add, contentDescription = null) },
         text = { Text(text = "Agregar Tarea")},
     )
@@ -78,3 +78,4 @@ fun SelectedFAB(selectedFAB: String, navController: NavHostController, repositor
         }
     }
 }
+

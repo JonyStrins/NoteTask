@@ -39,6 +39,8 @@ import com.example.notetask.components.BottomAppTaskComponentEdit
 import com.example.notetask.components.Carousel
 import com.example.notetask.components.TopBarComponent
 import com.example.notetask.components.TopBarComponentEdit
+import com.example.notetask.components.TopBarTaskComponent
+import com.example.notetask.components.TopBarTaskComponentEdit
 import com.example.notetask.models.TareaEntity
 import com.example.notetask.repository.MultimediaRepository
 import com.example.notetask.repository.TareaRepository
@@ -83,6 +85,9 @@ fun AddTask(
         tipo = 1
     )
     Scaffold (
+        topBar = {
+                 TopBarTaskComponent("agregar Tarea", navController )
+        },
         bottomBar = {
             BottomAppTaskComponentAdd(
                 navController,
@@ -243,6 +248,9 @@ fun EditTaskScreen(
         tipo = 1
     )
     Scaffold(
+        topBar = {
+                 TopBarTaskComponentEdit("Editar tarea", navController, viewModel, entity)
+        },
         bottomBar = {
             BottomAppTaskComponentEdit(navController, viewModel, multiViewModel, entity)
         }
@@ -254,7 +262,8 @@ fun EditTaskScreen(
         ) {
             if (multiViewModel.obtenerMultimediaPorNota(entity.id).isNotEmpty()){
                 Row(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .height(200.dp)
                         .padding(2.dp, 5.dp)
                 ) {

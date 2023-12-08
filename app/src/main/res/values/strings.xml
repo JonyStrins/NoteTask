@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">NoteTask</string>
+    <string name="record_audio">Permiso para audio</string>
+    <string name="usar_camara">Permiso para camara</string>
+    <string name="abrir_multimedia">Permiso para multimedia</string>
+    <string name="Localizacion">Permiso para Localizacion</string>
+    <string name="notificacion">Permiso para Notificacion</string>
 </resources>

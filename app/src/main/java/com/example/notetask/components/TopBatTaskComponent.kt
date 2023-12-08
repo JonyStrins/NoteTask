@@ -2,8 +2,6 @@ package com.example.notetask.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -11,39 +9,37 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
-import com.example.notetask.models.NotaEntity
-import com.example.notetask.viewmodels.NotaViewModel
+import com.example.notetask.models.TareaEntity
+import com.example.notetask.viewmodels.TareaViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBarComponent(
+fun TopBarTaskComponent(
     agregacion: String,
     navController: NavController,
 ){
     TopAppBar(
-        title = { Text(agregacion) },
+        title = { Text(agregacion)},
         navigationIcon = {
             IconButton(onClick = {
                 navController.popBackStack()
-            }){
+            }) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
             }
         }
     )
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBarComponentEdit(
+fun TopBarTaskComponentEdit(
     agregacion: String,
     navController: NavController,
-    viewModel: NotaViewModel,
-    entity: NotaEntity
+    viewModel: TareaViewModel,
+    entity: TareaEntity
 ){
     TopAppBar(
-        title = { Text(agregacion) },
+        title = { Text(agregacion)},
         navigationIcon = {
             IconButton(onClick = {
                 navController.popBackStack()
@@ -53,7 +49,7 @@ fun TopBarComponentEdit(
         },
         actions = {
             IconButton(onClick = {
-                viewModel.eliminarNota(entity)
+                viewModel.eliminarTarea(entity)
                 navController.popBackStack()
             }){
                 Icon(Icons.Outlined.Delete, contentDescription = null)
