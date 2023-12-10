@@ -36,7 +36,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.notetask.alarmanager.AlarmItem
@@ -47,6 +46,7 @@ import com.example.notetask.components.BottomAppTaskComponentEdit
 import com.example.notetask.components.Carousel
 import com.example.notetask.components.TopBarTaskComponent
 import com.example.notetask.components.TopBarTaskComponentEdit
+import com.example.notetask.location.CurrentLocationScreen
 import com.example.notetask.models.TareaEntity
 import com.example.notetask.repository.MultimediaRepository
 import com.example.notetask.repository.TareaRepository
@@ -102,7 +102,7 @@ fun AddTask(
     )
     Scaffold (
         topBar = {
-                 TopBarTaskComponent("agregar Tarea", navController )
+            TopBarTaskComponent("agregar Tarea", navController )
         },
         bottomBar = {
             BottomAppTaskComponentAdd(
@@ -169,6 +169,8 @@ fun AddTask(
                 Spacer(modifier = Modifier.width(8.dp))
             }
             Spacer(modifier = Modifier.height(7.dp))
+            CurrentLocationScreen()
+            Spacer(modifier = Modifier.width(8.dp))
             TextField(
                 value = contenido,
                 onValueChange = { contenido = it },
@@ -285,7 +287,7 @@ fun EditTaskScreen(
     )
     Scaffold(
         topBar = {
-                 TopBarTaskComponentEdit("Editar tarea", navController, viewModel, entity)
+            TopBarTaskComponentEdit("Editar tarea", navController, viewModel, entity)
         },
         bottomBar = {
             BottomAppTaskComponentEdit(navController, viewModel, multiViewModel, entity)
@@ -357,6 +359,7 @@ fun EditTaskScreen(
                 Spacer(modifier = Modifier.width(8.dp))
             }
             Spacer(modifier = Modifier.height(7.dp))
+            //aqui va lo del mapa
             TextField(
                 value = contenido.toString(),
                 onValueChange = { contenido = it },
