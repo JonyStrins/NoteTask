@@ -13,7 +13,8 @@ private const val BASE_URL =
     "https://api.openrouteservice.org"
 
 private const val API_KEY =
-    "6b3ce3597x51110001cf624819e6024a736b47666fe215764a8bdba7" //obtener esrkey registrandose
+    "AIzaSyAk8J9pxj3NwYfhunyCK2Bm-UluPBihigo"
+//"6b3ce3597x51110001cf624819e6024a736b47666fe215764a8bdba7" //obtener esrkey registrandose
 
 
 private val retrofit = Retrofit.Builder()
@@ -26,10 +27,10 @@ private val retrofit = Retrofit.Builder()
 
 interface IOpenRouteServiceAPI {
     @GET("/v2/directions/{profile}")
-    suspend fun directions_get(@Path("profile") profile: String,
-                               @Query("api_key") apikey : String = API_KEY,
-                               @Query("start") start : String,
-                               @Query("end") end : String ): GeoJSONDirection
+    suspend fun directions_get( @Path("profile") profile: String,
+                                @Query("api_key") apikey : String = API_KEY,
+                                @Query("start") start : String ,
+                                @Query("end") end : String ): GeoJSONDirection
 
     @GET("/v2/directions/driving-car?api_key=xxxxxx&start=8.681495,49.41461&end=8.687872,49.420318")
     suspend  fun directions_get( ): GeoJSONDirection

@@ -50,6 +50,7 @@ import com.example.notetask.components.Carousel
 import com.example.notetask.components.TopBarTaskComponent
 import com.example.notetask.components.TopBarTaskComponentEdit
 import com.example.notetask.location.PermissionBox
+import com.example.notetask.mapas.MapasScreen
 import com.example.notetask.mapasosmandroidcompose.OSMComposeMapa
 import com.example.notetask.models.TareaEntity
 import com.example.notetask.repository.MultimediaRepository
@@ -179,6 +180,7 @@ fun AddTask(
             }
             Spacer(modifier = Modifier.height(7.dp))
             CurrentLocationScreen()
+            MapasScreen()
             Spacer(modifier = Modifier.width(8.dp))
             TextField(
                 value = contenido,
@@ -306,6 +308,7 @@ fun EditTaskScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
+                .verticalScroll(rememberScrollState())
         ) {
             if (multiViewModel.obtenerMultimediaPorNota(entity.id).isNotEmpty()){
                 Row(
@@ -369,6 +372,8 @@ fun EditTaskScreen(
             }
             Spacer(modifier = Modifier.height(7.dp))
             //aqui va lo del mapa
+            CurrentLocationScreen()
+            MapasScreen()
             TextField(
                 value = contenido.toString(),
                 onValueChange = { contenido = it },
@@ -398,6 +403,7 @@ fun CurrentLocationScreen() {
         },
     )
 }
+
 @RequiresPermission(
     anyOf = [Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION],
 )
@@ -405,7 +411,7 @@ fun CurrentLocationScreen() {
 fun CurrentLocationContent(usePreciseLocation: Boolean) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
-    var controlmapa by remember { mutableStateOf(false) }
+    var controlmapa by remember { mutableStateOf(false)}
     var longitud by remember { mutableStateOf(0.0) }
     var latitud by remember { mutableStateOf(0.0) }
     val locationClient = remember {
@@ -433,15 +439,15 @@ fun CurrentLocationContent(usePreciseLocation: Boolean) {
                 scope.launch(Dispatchers.IO) {
                     val result = locationClient.lastLocation.await()
                     locationInfo = if (result == null) {
-                        "No se conoce la ultima localizacion. Try fetching the current location first"
+                        "No last known location. Try fetching the current location first"
                     } else {
-                        "Posicion actual is \n" + "lat : ${result.latitude}\n" +
+                        "Current location is \n" + "lat : ${result.latitude}\n" +
                                 "long : ${result.longitude}\n" + "fetched at ${System.currentTimeMillis()}"
                     }
                 }
             },
         ) {
-            Text("Ultima Localización")
+            Text("Get last known location")
         }
 
         Button(
@@ -459,7 +465,7 @@ fun CurrentLocationContent(usePreciseLocation: Boolean) {
                     ).await()
                     result?.let { fetchedLocation ->
                         locationInfo =
-                            "Actual Localizacion es \n" + "lat : ${fetchedLocation.latitude}\n" +
+                            "Current location is \n" + "lat : ${fetchedLocation.latitude}\n" +
                                     "long : ${fetchedLocation.longitude}\n" + "fetched at ${System.currentTimeMillis()}"
                         longitud = fetchedLocation.longitude
                         latitud = fetchedLocation.latitude
@@ -469,7 +475,7 @@ fun CurrentLocationContent(usePreciseLocation: Boolean) {
             },
         ) {
             Column {
-                Text(text = "Tomar localizacion actual")
+                Text(text = "Get current location")
             }
         }
         Text(
@@ -486,5 +492,3 @@ fun CurrentLocationContent(usePreciseLocation: Boolean) {
 
     }
 }
-
-

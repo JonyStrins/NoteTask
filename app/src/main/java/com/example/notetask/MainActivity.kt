@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import com.example.notetask.Permisos.GrabarAudioScreen
 import com.example.notetask.Permisos.PermisoAccederMultimedia
 import com.example.notetask.Permisos.fotoPermiso
+import com.example.notetask.Permisos.localizacionPermiso
 import com.example.notetask.Permisos.notificacionPermiso
 import com.example.notetask.navigation.NavManager
 import com.example.notetask.ui.theme.NoteTaskTheme
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
                         GrabarAudioScreen()
                         fotoPermiso()
                         PermisoAccederMultimedia()
-                        //localizacionPermiso()
+                        localizacionPermiso()
                         notificacionPermiso()
                     }
                 }

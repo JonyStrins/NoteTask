@@ -23,7 +23,7 @@ class OpenRouteServiceViewModel : ViewModel() {
         )
     }
 
-    fun directions_get(profile: String, start: GeoPoint, end: GeoPoint){
+    fun directions_get( profile: String,  start: GeoPoint,  end: GeoPoint){
 
         viewModelScope.launch(Dispatchers.IO) {
 
