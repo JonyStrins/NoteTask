@@ -5,11 +5,16 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,27 +40,47 @@ fun MapasScreen(){
         position = defaultCameraPosition
     }
     var isMapLoaded by remember { mutableStateOf(false) }
-    Box(modifier = Modifier.fillMaxSize()){
-      GoogleMapView(
-          modifier = Modifier.matchParentSize().fillMaxSize().height(300.dp),
-          cameraPositionState = cameraPositionState,
-          onMapLoaded = {
-              isMapLoaded = true
-          }
-      )
-        if(!isMapLoaded){
-            AnimatedVisibility(
+    var isMapVisible by remember { mutableStateOf(false) }
+
+    Column {
+        Button(
+            onClick = { isMapVisible = !isMapVisible },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text(text = if (isMapVisible) "Ocultar Mapa" else "Mostrar Mapa")
+        }
+
+        if (isMapVisible) {
+            Box(
                 modifier = Modifier
-                    .matchParentSize(),
-                visible = !isMapLoaded,
-                enter = EnterTransition.None,
-                exit = fadeOut()
-            ){
-                CircularProgressIndicator(
-                    modifier = Modifier
-                        .background(MaterialTheme.colorScheme.background)
-                        .wrapContentSize()
+                    .fillMaxSize()
+                    .height(300.dp)
+            ) {
+                GoogleMapView(
+                    modifier = Modifier.matchParentSize(),
+                    cameraPositionState = cameraPositionState,
+                    onMapLoaded = {
+                        isMapLoaded = true
+                    }
                 )
+
+                if (!isMapLoaded) {
+                    this@Column.AnimatedVisibility(
+                        modifier = Modifier
+                            .matchParentSize(),
+                        visible = !isMapLoaded,
+                        enter = EnterTransition.None,
+                        exit = fadeOut()
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .background(MaterialTheme.colorScheme.background)
+                                .wrapContentSize()
+                        )
+                    }
+                }
             }
         }
     }

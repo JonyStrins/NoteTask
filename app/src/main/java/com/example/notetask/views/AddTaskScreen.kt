@@ -179,8 +179,8 @@ fun AddTask(
                 Spacer(modifier = Modifier.width(8.dp))
             }
             Spacer(modifier = Modifier.height(7.dp))
-            CurrentLocationScreen()
-            MapasScreen()
+            //CurrentLocationScreen()
+
             Spacer(modifier = Modifier.width(8.dp))
             TextField(
                 value = contenido,
@@ -189,10 +189,11 @@ fun AddTask(
                 label = { Text("Descripcion") },
                 placeholder = { Text("Descripcion") }
             )
+            Spacer(modifier = Modifier.width(8.dp))
+            MapasScreen()
         }
     }
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AddTaskDatePicker(
@@ -372,8 +373,7 @@ fun EditTaskScreen(
             }
             Spacer(modifier = Modifier.height(7.dp))
             //aqui va lo del mapa
-            CurrentLocationScreen()
-            MapasScreen()
+            //CurrentLocationScreen()
             TextField(
                 value = contenido.toString(),
                 onValueChange = { contenido = it },
@@ -381,6 +381,8 @@ fun EditTaskScreen(
                 label = { Text("Descripcion") },
                 placeholder = { Text("Descripcion") }
             )
+            Spacer(modifier = Modifier.width(8.dp))
+            MapasScreen()
         }
     }
 }

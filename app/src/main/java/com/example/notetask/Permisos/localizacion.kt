@@ -47,7 +47,8 @@ fun localizacionPermiso(){
     Box(
         Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .padding(top = 70.dp),
     ) {
         Column(
             modifier = Modifier

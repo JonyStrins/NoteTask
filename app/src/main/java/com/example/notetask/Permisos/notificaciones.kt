@@ -1,6 +1,8 @@
 package com.example.notetask.Permisos
 
 import android.Manifest
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -36,6 +38,7 @@ import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun notificacionPermiso(){
@@ -49,7 +52,8 @@ fun notificacionPermiso(){
     Box(
         Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .padding(top = 70.dp),
     ) {
         Column(
             modifier = Modifier
